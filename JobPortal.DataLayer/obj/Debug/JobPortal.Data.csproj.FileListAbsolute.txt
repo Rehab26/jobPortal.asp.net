@@ -1,0 +1,11 @@
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\JobPortal.DataLayer.dll.config
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\JobPortal.DataLayer.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\JobPortal.DataLayer.pdb
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\obj\Debug\JobPortal.Data.csproj.CoreCompileInputs.cache
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\obj\Debug\JobPortal.Data.csproj.CopyComplete
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\obj\Debug\JobPortal.DataLayer.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.DataLayer\obj\Debug\JobPortal.DataLayer.pdb

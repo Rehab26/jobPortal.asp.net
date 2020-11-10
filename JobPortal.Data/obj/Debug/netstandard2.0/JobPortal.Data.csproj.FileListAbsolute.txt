@@ -1,0 +1,5 @@
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Data\bin\Debug\netstandard2.0\JobPortal.Data.deps.json
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Data\bin\Debug\netstandard2.0\JobPortal.Data.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Data\obj\Debug\netstandard2.0\JobPortal.Data.csprojAssemblyReference.cache
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Data\obj\Debug\netstandard2.0\JobPortal.Data.AssemblyInfoInputs.cache
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Data\obj\Debug\netstandard2.0\JobPortal.Data.AssemblyInfo.cs

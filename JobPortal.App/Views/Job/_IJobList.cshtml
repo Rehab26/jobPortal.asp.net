@@ -1,0 +1,26 @@
+﻿@model IEnumerable<JobPortal.Models.Implementation.Job>
+
+@foreach (var item in Model)
+{
+<div class="job-ad-item">
+    <div class="item-info">
+        @*<div class="item-image-box col-sm-3">*@
+        <div class="item-image-box">
+            <div class="item-image">
+                <a href="@Url.Action("details","job", new{id=@item.ID} )"> <img src="@Url.Content("~/assets/images/job/4.png")" alt="Image" class="img-responsive"> </a>
+            </div><!-- item-image -->
+        </div>
+
+        <div class="ad-info">
+            <span>@Html.ActionLink(@item.Title, "details", "Job", new { id = item.ID }, null)  @@ <a href="#">@item.Company.Name</a></span>
+            <div class="ad-meta">
+                <ul>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>@item.State, @item.Country</li>
+                    <li><i class="fa fa-clock-o" aria-hidden="true"></i>@item.Type.ToString()</li>
+                    <li><i class="fa fa-money" aria-hidden="true"></i>NGN @item.MinimumSalary.ToString("N2") - NGN @item.MaximumSalary.ToString("N2")</li>
+                </ul>
+            </div><!-- ad-meta -->
+        </div><!-- ad-info -->
+    </div><!-- item-info -->
+</div><!-- job-ad-item -->}
+

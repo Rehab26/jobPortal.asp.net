@@ -1,0 +1,52 @@
+﻿@model IEnumerable<JobPortal.Models.Implementation.JobApplication>
+
+<section class=" job-bg page ad-profile-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Job Application</li>
+            </ol>
+            <h2 class="title">Applicants | @ViewBag.JobTitle</h2>
+        </div><!-- breadcrumb-section -->
+
+        <div class="section">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Profile Image</th>
+                        <th>Applicant's Name</th>
+                        <th>Profile Link</th>
+                        <th>Pitch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1; }
+                    @foreach (var jobApp in Model)
+                    {
+        <tr>
+            <td>@count</td>
+            <td>
+                <a class="pull-left" href="#">
+                    <img src="@Url.Content(jobApp.user.Resume.ProfileImageUri)" class="media-object img-responsive img-rounded" style="width:150px; height:150px; margin-right:20px" />
+                </a>
+            </td>
+            <td>@jobApp.user.Resume.FullName</td>
+            <td>@Html.ActionLink("View full profile", "Details", "Profile", new { uid = jobApp.user.Id }, new { @class = "btn btn-primary" })</td>
+            <td>
+                @if (!String.IsNullOrEmpty(jobApp.pitchLocation))
+                {
+@Html.ActionLink("Watch video pitch", "WatchPitch", "Job", new { f = jobApp.pitchLocation }, new { @class = "btn btn-danger" })}
+        </td>
+    </tr>count++;
+                }
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</section>
+

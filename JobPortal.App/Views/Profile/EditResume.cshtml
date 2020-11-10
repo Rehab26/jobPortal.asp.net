@@ -1,0 +1,391 @@
+﻿@model JobPortal.Models.ViewModels.EditResumeViewModel
+
+<section class="job-bg ad-details-page">
+    <div class="container">
+
+        <div class="breadcrumb-section">
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Edit Resume</li>
+            </ol><!-- breadcrumb -->
+            <h2 class="title">Edit Resume</h2>
+        </div><!-- banner -->
+
+        <div class="job-profile section">
+            <div class="user-profile">
+                <div class="user-images">
+                    <img class="img-responsive" src="@Url.Content(ViewBag.ProfileImgUri)" alt="User" style="width:73px;height:72px">
+                </div>
+                <div class="user">
+                    <h2>Hello, <a href="#">@ViewBag.UserName.Split('@')[0]</a></h2>
+                    <h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>
+                </div>
+
+                <div class="favorites-user">
+                    <div class="my-ads">
+                        <a href="/profile/AppliedJobs">@ViewBag.NoOfAppliedJobs<small>Applied Jobs</small></a>
+                    </div>
+                    <div class="favorites">
+                        <a href="/profile/Favourites">@ViewBag.NoOfFavourites<small>Favorites</small></a>
+                    </div>
+                </div>
+            </div><!-- user-profile -->
+
+            <ul class="user-menu">
+                <li>@Html.ActionLink("Manage Account", "Manage")</li>
+                <li>@Html.ActionLink("Resume", "Index")</li>
+                <li class="active">@Html.ActionLink("Edit Resume", "EditResume")</li>                
+                <li>@Html.ActionLink("Favourites", "Favourites")</li>
+                <li>@Html.ActionLink("Applied jobs", "AppliedJobs")</li>                
+            </ul>
+        </div><!-- ad-profile -->
+
+        <div class="adpost-details post-resume">
+            <div class="row">
+                <div class="col-md-8 clearfix">
+
+                    @using (Html.BeginForm("EditResume", "Profile", FormMethod.Post, new { enctype="multipart/form-data"}))
+                    {
+                        <fieldset>
+
+                            <div class="section express-yourself">
+                                <h4>Express Yourself</h4>
+                                <div class="row form-group">
+                                    <label class="col-sm-4 label-title">Full Name</label>
+                                    <div class="col-sm-8">
+                                        @*<input type="text" name="name" class="form-control" placeholder="ex Jhon Doe">*@
+                                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "ex Jhon Doe" })
+                                    </div>
+                                </div>
+                                <div class="row form-group additional-information">
+                                    <label class="col-sm-4 label-title">Additional Information</label>
+                                    <div class="col-sm-8">
+                                        @*<textarea class="form-control" placeholder="Address: 123 West 12th Street, Suite 456 New York, NY 123456\n Phone: +012 345 678 910 \n Email: itsme@surzilegeek.com*"></textarea>*@
+                                        @Html.TextAreaFor(m => m.AdditionalInformation, new { @class = "form-control", @placeholder = "Address: 123 West 12th Street, Suite 456 New York, NY 123456\n Phone: +012 345 678 910 \n Email: itsme@surzilegeek.com*" })
+                                    </div>
+                                </div>
+                                <div class="row form-group photos-resume">
+                                    <label class="col-sm-4 label-title">Profile image</label>
+                                    <div class="col-sm-8 ">
+                                        @*<label class="upload-image left" for="upload-image-one">
+                                            <input type="file" id="upload-image-one">
+                                            Type: JPG, PNG  Size: 3.5 x 4.5 cm
+                                        </label>*@
+                                        @*<label class="upload-image" for="upload-image-two">
+                                            <input type="file" id="file" name="file">
+                                            Upload Photo
+                                        </label>*@
+
+                                        <input type="file" id="file" name="file" accept="image/*">
+                                    </div>
+                                </div>
+                            </div><!-- postdetails -->
+
+                            <div class="section career-objective">
+                                <h4>Career Objective</h4>
+                                <div class="form-group">
+                                    @*<textarea class="form-control" placeholder="Write few lines about your career objective" rows="8"></textarea>*@
+                                    @Html.TextAreaFor(m => m.CareerObjective, new { @class = "form-control", @placeholder = "Write few lines about your career objective", @rows = "8" })
+                                </div>
+                                <span>5000 characters left</span>
+                            </div><!-- career-objective -->
+
+                            <div class="section">
+                                <div id="expItems" class="section">
+                                    <h4>Work History</h4>
+                                    @foreach (var exp in Model.WorkExperiences)
+                                    {
+                                        <div class="expItemRow row" style="margin:auto">
+                                            <div class="row form-group">
+                                                <label class="col-sm-3 label-title">Company Name</label>
+                                                <div class="col-sm-9">
+                                                    @*<input type="text" name="name" class="form-control" placeholder="Name">*@
+                                                    @Html.TextBox("CompanyName", @exp.CompanyName, new { @class = "form-control formfield", @placeholder = "Name", @type = "text" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <label class="col-sm-3 label-title">Designation</label>
+                                                <div class="col-sm-9">
+                                                    @*<input type="text" name="name" class="form-control" placeholder="Human Resource Manager">*@
+                                                    @Html.TextBox("Designation", @exp.Designation, new { @class = "form-control formfield", @placeholder = "Human Resource Manager", @type = "text" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group time-period">
+                                                <label class="col-sm-3 label-title">Time Period</label>
+                                                <div class="col-sm-9">
+                                                    <input type="date" name="StartDate" class="form-control" value="@exp.StartDate.ToString("yyyy-MM-dd")">
+                                                    <input type="date" name="EndDate" class="form-control pull-right" value="@exp.EndDate.ToString("yyyy-MM-dd")">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group job-description">
+                                                <label class="col-sm-3 label-title">Job Description</label>
+                                                <div class="col-sm-9">
+                                                    @*<textarea class="form-control" placeholder="" rows="8"></textarea>*@
+                                                    @Html.TextArea("JobDescription", @exp.JobDescription, new { @class = "form-control formfield", @placeholder = "", @type = "text", @rows = "8" })
+                                                </div>
+                                            </div>
+                                            <input type="button" value="DelCheck" />
+                                            <div class="buttons pull-right">
+                                                @*<a href="#" class="btn delete">Delete</a>*@
+                                                <input type="button" class="btn btn-danger btnDeleteExp" value="Delete" onclick="delExp(this)" />
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="buttons pull-right">
+                                    <a href="#" class="btn" id="addExpRow">Add New Exprience</a>
+                                </div>
+                            </div>
+                         
+                            
+                            <div class="section">
+                                <div id="eduItems" class="section education-background">
+                                    <h4>Education Background</h4>
+                                    @foreach (var edu in Model.EducationBackgrounds)
+                                    {
+
+                                        <div class="eduItemRow row" style="margin:auto">
+
+                                            <div class="row form-group">
+                                                <label class="col-sm-3 label-title">Institute Name</label>
+                                                <div class="col-sm-9">
+                                                    @*<input type="text" name="InstitutionName" class="form-control formfield" placeholder="FUTA">*@
+                                                    @Html.TextBox("InstitutionNamme", @edu.InstitutionName, new { @class = "form-control formfield", @placeholder = "FUTA", @type = "text" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row form-group job-description">
+                                                <label class="col-sm-3 label-title">Description</label>
+                                                <div class="col-sm-9">
+                                                    @*<textarea class="form-control formfield" placeholder="Engineering school" rows="8"></textarea>*@
+                                                    @Html.TextArea("Description", @edu.Description, new { @class = "form-control formfield", @placeholder = "Engineering school", @rows = "8" })
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <label class="col-sm-3 label-title">Degree</label>
+                                                <div class="col-sm-9">
+                                                    @*<input type="text" name="name" class="form-control" placeholder="Human Resource Manager">*@
+                                                    @Html.TextBox("DegreeAwarded", @edu.DegreeAwarded, new { @class = "form-control formfield", @placeholder = "Human Resource Manager", @type = "text" })
+                                                </div>
+                                            </div>
+                                            <div class="row form-group time-period">
+                                                <label class="col-sm-3 label-title">Time Period</label>
+                                                <div class="col-sm-9">
+                                                    @*<input type="text" name="StartDate" class="form-control" placeholder="dd/mm/yy" value="@edu.StartDate"><span>-</span>*@
+                                                    @*@Html.TextBox("StartDate", @edu.StartDate, new { @class = "form-control"})*@
+
+                                                    <input type="date" name="StartDate" class="form-control" value="@edu.StartDate.ToString("yyyy-MM-dd")">
+                                                    <input type="date" name="EndDate" class="form-control pull-right" value="@edu.EndDate.ToString("yyyy-MM-dd")">
+                                                </div>
+                                            </div>
+
+                                            <div class="buttons pull-right">
+                                                @*<a href="#" class="btn btnDelete" id="delEduRow">Delete</a>*@
+                                                @*<button class="btn btnDeleteEdu" type="button" > Delete </button>*@
+                                                <input type="button" class="btn btn-danger btnDeleteEdu" value="Delete" onclick="delEdu(this)" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div><!-- education -->
+                                <div class="buttons pull-right">
+                                    <a href="#" class="btn" id="addEduRow">Add New Education</a>
+                                </div>
+                            </div>
+                           
+
+                           
+
+                            <div class="section special-qualification">
+                                <h4>Special Qualification</h4>
+                                <div class="form-group item-description">
+                                    @*<textarea class="form-control" placeholder="Write few lines about your special qualification" rows="8"></textarea>*@
+                                    @Html.TextAreaFor(m => m.SkillsAndQualifications, new { @class = "form-control", @placeholder = "Write few lines about your special qualification", @rows = "8" })
+                                </div>
+                            </div><!-- special-qualification -->
+                            
+                            <div class="section">
+                                <div id="langItems" class="section language-proficiency">
+                                    <h4>Language Proficiency:</h4>
+                                    @foreach (var lang in Model.Languages)
+                                    {
+                                        <div class="langItemRow row" style="margin:auto">
+                                            <div class="row form-group">
+                                                <label class="col-sm-3 label-title">Language Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="name" class="form-control formfield" placeholder="ex: English" value="@lang.Name">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group rating">
+                                                <label class="col-sm-3 label-title">Rating</label>
+                                                <div class="col-sm-9">
+                                                    @*<div class="rating-star">
+                                <div class="rating">
+                                    <input type="radio" data-val="1" onclick="LanguageRate(10, this)" id="star1" name="rating"><label class="full" for="star1"></label>
+
+                                    <input type="radio" data-val="2" onclick="LanguageRate(9, this)" id="star2" name="rating"><label class="half" for="star2"></label>
+
+                                    <input type="radio" data-val="3" onclick="LanguageRate(8, this)" id="star3" name="rating"><label class="full" for="star3"></label>
+
+                                    <input type="radio" data-val="4" onclick="LanguageRate(7, this)" id="star4" name="rating"><label class="half" for="star4"></label>
+
+                                    <input type="radio" data-val="5" onclick="LanguageRate(6, this)" id="star5" name="rating"><label class="full" for="star5"></label>
+
+                                    <input type="radio" data-val="6" onclick="LanguageRate(5, this)" id="star6" name="rating"><label class="half" for="star6"></label>
+
+                                    <input type="radio" data-val="7" onclick="LanguageRate(4, this)" id="star7" name="rating"><label class="full" for="star7"></label>
+
+                                    <input type="radio" data-val="8" onclick="LanguageRate(3, this)" id="star8" name="rating"><label class="half" for="star8"></label>
+
+                                    <input type="radio" data-val="9" onclick="LanguageRate(2, this)" id="star9" name="rating"><label class="full" for="star9"></label>
+
+                                    <input type="radio" data-val="10" onclick="LanguageRate(1, this)" id="star10" name="rating"><label class="half" for="star10"></label>
+                                </div>
+                                <input name="rating" class="myRating" type="hidden" value="0" />
+                            </div>*@<!-- rating-star -->
+                                                    @*<input type="radio" id="langRange" name="langRange" value="1">
+                            <input type="radio" id="langRange" name="langRange" value="2">
+                            <input type="radio" id="langRange" name="langRange" value="3">
+                            <input type="radio" id="langRange" name="langRange" value="4">
+                            <input type="radio" id="langRange" name="langRange" value="5">*@
+
+                                                    @*@{ int k = lang.Rating;}
+                                                    @Html.DropDownList("langRate", new List<SelectListItem>() {
+                                           new SelectListItem { Text = "0", Value = "0", Selected= k==0 },
+                                           new SelectListItem { Text = "1", Value = "1", Selected= k==1 },
+                                           new SelectListItem { Text = "2", Value = "2" , Selected= k==2},
+                                           new SelectListItem { Text = "3", Value = "3" , Selected= k==3},
+                                           new SelectListItem { Text = "4", Value = "4" , Selected= k==4},
+                                           new SelectListItem { Text = "5", Value = "5" , Selected= k==5}
+                                       }, new { @class = "form-control" })*@
+
+
+                                                </div>
+                                            </div>
+                                            <div class="buttons pull-right">
+                                                <input type="button" class="btn btn-danger btnDeleteLang" value="Delete" onclick="delLang(this)" />
+                                            </div>
+                                        </div>
+                                                        }
+
+                                </div><!-- language-proficiency -->
+                                <div class="buttons pull-right" style="margin-top:0px">
+                                    <a href="#" class="btn" id="addLangRow">Add New Language</a>
+                                </div>
+                            </div>
+                           
+
+                            <div class="section company-information">
+                                <h4>Personal Deatils</h4>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Father's Name</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" name="name" class="form-control" placeholder="Robert Doe">*@
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "ex Jhon Doe" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Mother's Name</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" name="name" class="form-control" placeholder="Ismatic Roderos Doe">*@
+                                        @Html.TextBoxFor(m => m.SecondName, new { @class = "form-control", @placeholder = "ex Jhon Doe" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Date of Birth</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" id="DateOfBirth" name="DateOfBirth" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
+                                        @*@Html.EditorFor(m => m.DateOfBirth, new { @class = "form-control", @type = "date", @Value = Model.DateOfBirth.ToString("yyyy-MM-dd") })*@
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Birth Place</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" name="name" class="form-control" placeholder="United State of America">*@
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Nationality</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" name="name" class="form-control" placeholder="Canadian">*@
+                                        @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control", @placeholder = "Canadian" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Gender</label>
+                                    <div class="col-sm-9">
+                                        @*@Html.TextBoxFor(m => m.Gender, new { @class = "form-control", @placeholder = "Male" })*@
+                                        @Html.DropDownList("Gender", new List<SelectListItem>()
+                                   {
+                                       new SelectListItem {Text="Male", Value="Male"},
+                                       new SelectListItem {Text="Female", Value="Female"}
+                                   }, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Address</label>
+                                    <div class="col-sm-9">
+                                        @*<input type="text" name="name" class="form-control" placeholder="121 King Street, Melbourne Victoria, 1200 USA">*@
+                                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "121 King Street, Melbourne Victoria, 1200 USA" })
+                                    </div>
+                                </div>
+                            </div><!-- section -->
+
+                            <div class="section special-qualification">
+                                <h4>Declaration</h4>
+                                <div class="form-group item-description">
+                                    @*<textarea class="form-control" placeholder="" rows="8"></textarea>*@
+                                </div>
+                            </div><!-- special-qualification -->
+
+
+
+                            <input type="submit" id="btnSubmit" />
+                        </fieldset>
+                    }
+
+
+                </div>
+
+                <!-- quick-rules -->
+                <div class="col-md-4">
+                    <div class="section quick-rules">
+                        <h4>Quick rules</h4>
+                        <p class="lead">Posting on <a href="http://www.thejobpitch.com">TheJobPitch.com</a> is currently free! However, all job ads must follow these rules:</p>
+
+                        <ul>
+                            <li>Make sure you post in the correct category.</li>
+                            <li>Do not post the same ad more than once or repost an ad within 48 hours.</li>
+                            <li>Do not upload pictures with watermarks.</li>
+                            <li>Do not post ads containing multiple items unless it's a package deal.</li>
+                            <li>Do not put your email or phone numbers in the title or description.</li>
+                        </ul>
+                    </div>
+                </div><!-- quick-rules -->
+            </div><!-- photos-ad -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div><!-- container -->
+</section><!-- main -->
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/edit-resume.js"></script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

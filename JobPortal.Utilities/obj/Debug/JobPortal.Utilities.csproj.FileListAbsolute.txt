@@ -1,0 +1,6 @@
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\bin\Debug\JobPortal.Utilities.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\bin\Debug\JobPortal.Utilities.pdb
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\obj\Debug\JobPortal.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\obj\Debug\JobPortal.Utilities.dll
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\obj\Debug\JobPortal.Utilities.pdb
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.Utilities\obj\Debug\JobPortal.Utilities.csprojAssemblyReference.cache

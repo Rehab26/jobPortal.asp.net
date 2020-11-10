@@ -1,0 +1,177 @@
+﻿@model JobPortal.App.Models.PostJobViewModel
+
+<section class=" job-bg ad-details-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="index.html">Job</a></li>
+                <li>Job Post </li>
+            </ol><!-- breadcrumb -->
+            <h2 class="title">Post Your Job</h2>
+        </div><!-- banner -->
+  
+
+        <div class="job-postdetails">
+            <div class="row">
+                <div class="col-md-8">
+                   @using (Html.BeginForm("Post", "Job", FormMethod.Post))
+                   {
+                       @Html.AntiForgeryToken()
+                    <fieldset>
+                        <div class="section postdetails">
+                            <h4>Post Your Job<span class="pull-right">* Mandatory Fields</span></h4>
+                            <div class="row form-group add-title">
+                                <label class="col-sm-3 label-title">Job Category</label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("JobCatId",null, "Select", new { @class = "form-control" })
+                                    
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 ">Job Type<span class="required">*</span></label>                            
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("JobType", null, "Select", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.JobType)
+                                </div>
+
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 label-title">Job Title<span class="required">*</span></label>
+                                <div class="col-sm-9">                                   
+                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = "ex, Software Developer" })
+                                    @Html.ValidationMessage("Title", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row form-group item-description">
+                                <label class="col-sm-3 label-title">Description<span class="required">*</span></label>
+                                <div class="col-sm-9">                                   
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Write few lines about your jobs", @rows = "8" })                          
+                                    @Html.ValidationMessage("Description", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row characters">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    @*<p>5000 characters left</p>*@
+                                </div>
+                            </div>
+                            <div class="row form-group add-title location">
+                                <label class="col-sm-3 label-title">State<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("State", null, "Select", new { @class = "form-control" })    
+                                    @Html.ValidationMessage("State", new { @class = "text-danger" })                           
+                                </div>
+                            </div>
+                            <div class="row form-group select-price">
+                                <label class="col-sm-3 label-title">Salary<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    <label>NGN</label>
+                                    @Html.TextBoxFor(m => m.MinimumSalary, new { @class = "form-control", @placeholder = "Minimum" })                     
+                                    <span>-</span>
+                                    @Html.TextBoxFor(m => m.MaximumSalary, new { @class = "form-control", @placeholder = "Maximum" })                                                               
+                                    @Html.CheckBoxFor(m => m.IsSalaryNegotiable)                                    
+                                    <label for="IsSalaryNegotiable">Negotiable </label>
+
+                                    @Html.ValidationMessage("MinimumSalary", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("MaximumSalary", new { @class = "text-danger" })
+                                    
+                                </div>
+                            </div>
+                    
+                            <div class="row form-group add-title">
+                                <label class="col-sm-3 label-title">Experience<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    @Html.DropDownList("ExperienceLevel",null, "Select", new { @class = "form-control" })     
+                                    @Html.ValidationMessage("ExperienceLevel", new { @class = "text-danger" })                             
+                                </div>
+                            </div>
+                            <div class="row form-group add-title">
+                                <label class="col-sm-3 label-title">Deadline<span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                   @*@Html.EditorFor(m => m.ApplicationDeadline)*@
+                                    <input type="date" name="ApplicationDeadline" class="form-control pull-right" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                    @Html.ValidationMessage("ApplicationDeadline", new { @class = "text-danger" })
+                                    
+                                </div>
+                            </div>
+                            <div class="row form-group brand-name">
+                                <label class="col-sm-3 label-title">Required Skills <span class="required">*</span></label>
+                                <div class="col-sm-9">                                    
+                                    @Html.TextAreaFor(m => m.RequiredSkills, new { @class = "form-control", @placeholder = "What skill set do you require of the applicants?", @rows = "8" })
+                                    @Html.ValidationMessage("RequiredSkills", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row form-group brand-name">
+                                <label class="col-sm-3 label-title">Responsibilities <span class="required">*</span></label>
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(m => m.Responsibilities, new { @class = "form-control", @placeholder = "Job responsibilities", @rows = "8" })
+                                    @Html.ValidationMessage("Responsibilities", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- postdetails -->
+                      <div>
+                          @ViewBag.ErrorMsg
+                      </div>
+                        <div class="checkbox section agreement">
+                            <label for="chksend">
+                                <input type="checkbox"  name="chksend" id="chksend" onchange="chkTermsChanged()">
+                                You agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                            <button type="submit" disabled class="btn btn-primary" id="btnPost">Post Your Job</button>
+                        </div><!-- section -->
+
+                        @*<div class="checkbox">
+                            <label class="pull-left checked" for="signing-2"><input type="checkbox" name="signing-2" id="signing-2" onchange="chkTermsChanged()">By signing up for an account you agree to our Terms and Conditions</label>
+                        </div>
+                        <button type="submit" class="btn" id="btnRegCoy">Registration</button>*@
+
+                    </fieldset>
+                   }
+                    
+                    
+                </div>
+
+
+                <!-- quick-rules -->
+                <div class="col-md-4">
+                    <div class="section quick-rules">
+                        <h4>Quick rules</h4>
+                        <p class="lead">Posting an ad on <a href="http://www.thejobpitch.com">Thejobpitch.com</a> is free! However, all ads must follow our rules:</p>
+
+                        <ul>
+                            <li>Make sure you post in the correct category.</li>
+                            <li>Do not post the same ad more than once or repost an ad within 48 hours.</li>
+                            <li>Do not upload pictures with watermarks.</li>
+                            <li>Do not post ads containing multiple items unless it's a package deal.</li>
+                            <li>Do not put your email or phone numbers in the title or description.</li>
+                        </ul>
+                    </div>
+                </div><!-- quick-rules -->
+            </div><!-- photos-ad -->
+        </div>
+    </div><!-- container -->
+</section><!-- main -->
+
+
+<script type="text/javascript">
+    function chkTermsChanged() {
+     
+      
+        if (document.getElementById("chksend").checked) {
+            document.getElementById("btnPost").disabled = false
+        }
+        else {
+            document.getElementById("btnPost").disabled = true
+        }
+
+    }
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

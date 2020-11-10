@@ -1,0 +1,2 @@
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.UI\obj\Debug\JobPortal.UI.csprojAssemblyReference.cache
+C:\Users\Rehab\source\repos\JobPortal\JobPortal.UI\obj\Debug\JobPortal.UI.csproj.CoreCompileInputs.cache

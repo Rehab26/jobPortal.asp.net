@@ -1,0 +1,134 @@
+﻿@model JobPortal.App.Models.PostJobViewModel
+
+<section class=" job-bg ad-details-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="index.html">Job</a></li>
+                <li>Job Post </li>
+            </ol><!-- breadcrumb -->
+            <h2 class="title">Edit Job</h2>
+        </div><!-- banner -->
+
+        <div class="job-postdetails">
+            <div class="row">
+                <div class="col-md-8">
+                    @using (Html.BeginForm("Edit", "Job", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
+                        <fieldset>
+                            <div class="section postdetails">
+                            @Html.HiddenFor(m => m.Id)
+                                <h4>Post Your Job<span class="pull-right">* Mandatory Fields</span></h4>
+                                <div class="row form-group add-title">
+                                    <label class="col-sm-3 label-title">Job Category</label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("JobCatId", null, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 ">Job Type<span class="required">*</span></label>
+
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("Type", null, "Select", new { @class = "form-control" })
+                                    </div>
+
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Job Title<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder = "ex, Software Developer" })
+                                    </div>
+                                </div>
+                                <div class="row form-group item-description">
+                                    <label class="col-sm-3 label-title">Description<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Write few lines about your jobs", @rows = "8" })
+                                    </div>
+                                </div>
+                                <div class="row characters">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <p>5000 characters left</p>
+                                    </div>
+                                </div>
+                                <div class="row form-group add-title location">
+                                    <label class="col-sm-3 label-title">State<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("State", null, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row form-group select-price">
+                                    <label class="col-sm-3 label-title">Salary<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        <label>NGN</label>
+                                        @Html.TextBoxFor(m => m.MinimumSalary, new { @class = "form-control", @placeholder = "Minimum" })
+                                        <span>-</span>
+                                        @Html.TextBoxFor(m => m.MaximumSalary, new { @class = "form-control", @placeholder = "Maximum" })
+                                        @Html.CheckBoxFor(m => m.IsSalaryNegotiable)
+
+                                        <label for="IsSalaryNegotiable">Negotiable </label>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group add-title">
+                                    <label class="col-sm-3 label-title">Experience<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownList("ExperienceLevel", null, "Select", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row form-group add-title">
+                                    <label class="col-sm-3 label-title">Deadline<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.ApplicationDeadline)
+                                    </div>
+                                </div>
+                                <div class="row form-group brand-name">
+                                    <label class="col-sm-3 label-title">Required Skills <span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(m => m.RequiredSkills, new { @class = "form-control", @placeholder = "What skills do you require of the applicants?", @rows = "8" })
+                                    </div>
+                                </div>
+                                <div class="row form-group brand-name">
+                                    <label class="col-sm-3 label-title">Responsibilities <span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(m => m.Responsibilities, new { @class = "form-control", @placeholder = "Job responsibilities", @rows = "8" })
+                                    </div>
+                                </div>
+                            </div><!-- postdetails -->
+
+                            <div class="checkbox section agreement">
+                                <label for="send">
+                                    <input type="checkbox" name="send" id="send">
+                                    You agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and acknowledge that you are the rightful owner of this item and using Jobs to find a genuine buyer.
+                                </label>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div><!-- section -->
+
+                        </fieldset>
+                    }
+
+
+                </div>
+
+
+                <!-- quick-rules -->
+                <div class="col-md-4">
+                    <div class="section quick-rules">
+                        <h4>Quick rules</h4>
+                        <p class="lead">Posting on <a href="http://www.thejobpitch.com">TheJobPitch.com</a> is currently free! However, all job ads must follow these rules:</p>
+
+                        <ul>
+                            <li>Make sure you post in the correct category.</li>
+                            <li>Do not post the same ad more than once or repost an ad within 48 hours.</li>
+                            <li>Do not upload pictures with watermarks.</li>
+                            <li>Do not post ads containing multiple items unless it's a package deal.</li>
+                            <li>Do not put your email or phone numbers in the title or description.</li>
+                        </ul>
+                    </div>
+                </div><!-- quick-rules -->
+            </div><!-- photos-ad -->
+        </div>
+    </div><!-- container -->
+</section><!-- main -->

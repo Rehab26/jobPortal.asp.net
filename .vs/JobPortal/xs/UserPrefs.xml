@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{CFC7B1C9-E975-475C-B7CD-915458D6FA95}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="JobPortal.App/Views/Profile/user.cshtml">
+    <Files>
+      <File FileName="JobPortal.App/Views/Home/Index.cshtml" Line="101" Column="7" />
+      <File FileName="JobPortal.App/Views/Account/Login.cshtml" Line="202" Column="1" />
+      <File FileName="JobPortal.App/Views/Job/jobs.aspx" Line="12" Column="1" />
+      <File FileName="JobPortal.App/Views/Job/jobs.cshtml" Line="322" Column="8" />
+      <File FileName="JobPortal.App/Views/Profile/user.cshtml" Line="323" Column="8" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="JobPortal" expanded="True">
+            <Node name="JobPortal.App" expanded="True">
+              <Node name="Views" expanded="True">
+                <Node name="Profile" expanded="True">
+                  <Node name="user.cshtml" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.JobPortal.App PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

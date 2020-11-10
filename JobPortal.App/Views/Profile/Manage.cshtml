@@ -1,0 +1,115 @@
+﻿@model JobPortal.Models.ViewModels.ManageProfileViewModel
+<section class="clearfix job-bg  ad-profile-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Profile Details</li>
+            </ol>
+            <h2 class="title">My Profile</h2>
+        </div><!-- breadcrumb-section -->
+
+        <div class="job-profile section">
+            <div class="user-profile">
+                <div class="user-images">
+                    <img class="img-responsive" src="@Url.Content(ViewBag.ProfileImgUri)" alt="User" style="width:73px;height:72px">
+                </div>
+                <div class="user">
+                    <h2>Hello, <a href="#">@ViewBag.UserName.Split('@')[0]</a></h2>
+                    <h5>You last logged in at: 10-01-2017 6:40 AM [ WAT time (GMT + 1:00hrs)]</h5>
+                </div>
+
+                <div class="favorites-user">
+                    <div class="my-ads">
+                        <a href="/profile/AppliedJobs">@ViewBag.NoOfAppliedJobs<small>Applied Jobs</small></a>
+                    </div>
+                    <div class="favorites">
+                        <a href="/profile/Favourites">@ViewBag.NoOfFavourites<small>Favorites</small></a>
+                    </div>
+                </div>
+            </div><!-- user-profile -->
+
+            <ul class="user-menu">
+                <li class="active">@Html.ActionLink("Manage Account", "Manage")</li>
+                <li>@Html.ActionLink("Resume", "Index")</li>
+                <li>@Html.ActionLink("Edit Resume", "EditResume")</li>
+                @*<li>@Html.ActionLink("Profile Details", "Index")</li>*@
+                <li>@Html.ActionLink("Favourites", "Favourites")</li>
+                <li>@Html.ActionLink("Applied jobs", "AppliedJobs")</li>
+                <li><a href="#">Close account</a></li>
+            </ul>
+        </div><!-- ad-profile -->
+
+        <div class="profile job-profile">
+            <div class="user-pro-section">
+            
+
+                @using (Html.BeginForm("Manage", "Profile", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+
+                        <!-- profile-details -->
+                    <div class="profile-details section">
+                        <h2>Profile Details</h2>
+                        <div class="form-group">
+                            <label>Username</label>
+                            @*<input type="text" class="form-control" placeholder="Jhon Doe">*@
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Jhon Doe" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            @*<input type="email" class="form-control" placeholder="jhondoe@mail.com">*@
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "example@domain.com" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile</label>
+                            @*<input type="text" class="form-control" placeholder="+213 1234 56789">*@
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "+213 1234 56789" })
+                        </div>
+                    </div><!-- profile-details -->
+
+                      <!-- change-password -->
+                    <div class="change-password section">
+                        <h2>Change password</h2>
+                        <!-- form -->
+                        <div class="form-group">
+                            <label>Old Password</label>
+                            @*<input type="password" class="form-control">*@
+                            @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>New password</label>
+                            @*<input type="password" class="form-control">*@
+                            @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            @*<input type="password" class="form-control">*@
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div><!-- change-password -->
+
+                        <!-- preferences-settings -->
+                    <div class="preferences-settings section">                        
+                        <div class="buttons">
+                            <input type="submit" class="btn btn-primary" value="Update Profile" />
+                            @*<a href="#" class="btn">Update Profile</a>*@
+                            <a href="#" class="btn cancle">Cancel</a>
+                        </div>
+                    </div><!-- preferences-settings -->
+                }
+                        
+               
+              
+            
+            </div><!-- user-pro-edit -->
+        </div>
+    </div><!-- container -->
+</section><!-- ad-profile-page -->
+
+

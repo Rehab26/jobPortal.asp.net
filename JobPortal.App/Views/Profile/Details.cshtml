@@ -1,0 +1,204 @@
+﻿@model JobPortal.Models.Implementation.Resume
+
+<section class=" job-bg page ad-profile-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <ol class="breadcrumb">
+                <li><a href="/home">Home</a></li>
+                <li>Profile</li>
+            </ol>
+            <h2 class="title">Candidate's Profile</h2>
+        </div><!-- breadcrumb-section -->
+
+
+        <div class="job-profile section">
+            <div class="user-profile">
+                <div class="user-images">
+                    <img class="img-responsive" src="@Url.Content(Model.ProfileImageUri)" alt="User" style="width:73px;height:72px">
+                </div>
+
+                <div class="user">
+                    <h2>@Model.FullName</a></h2>
+                    <h5>@Model.CareerObjective</h5>
+                </div>
+
+            </div><!-- user-profile -->
+            <hr />
+        </div>
+
+        <div class="resume-content">
+            <div class="profile section clearfix">
+            
+                <div class="profile-info">
+                    <address>
+                        <p>Address: @Model.Address<br> Phone: @ViewBag.PhoneNumber <br> Email:<a href="#"> @ViewBag.Email</a></p>
+                    </address>
+                </div>
+            </div><!-- profile -->
+
+            <div class="career-objective section">
+                <div class="icons">
+                    <i class="fa fa-black-tie" aria-hidden="true"></i>
+                </div>
+                <div class="career-info">
+                    <h3>Career Objective</h3>
+                    @{
+                        var obj = Model.CareerObjective.Split('\n');
+                        foreach (var item in obj)
+                        {
+                            <p>@item</p>
+                        }
+                    }
+                </div>
+            </div><!-- career-objective -->
+
+            <div class="work-history section">
+                <div class="icons">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                </div>
+                <div class="work-info">
+                    <h3>Work History</h3>
+                    @if (Model.WorkExperiences.Any())
+                    {
+                        <ul>
+                            @foreach (var exp in Model.WorkExperiences)
+                            {
+                                <li>
+                                    <h4>@exp.Designation @@ @exp.CompanyName <span>2012 - Present</span></h4>
+                                    <p>@exp.JobDescription</p>
+                                </li>
+                            }
+                        </ul>
+                    }
+
+                </div>
+            </div><!-- work-history -->
+
+            <div class="educational-background section">
+                <div class="icons">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                </div>
+                <div class="educational-info">
+                    <h3>Education Background</h3>
+                    @if (Model.EducationBackgrounds.Any())
+                    {
+                        <ul>
+                            @foreach (var edu in Model.EducationBackgrounds)
+                            {
+                                <li>
+                                    <h4>@edu.DegreeAwarded @@ @edu.InstitutionName</h4>
+                                    <ul>
+                                        <li>Year: <span>1999 - 2001</span> </li>
+                                        @*<li>Concentration/Major: <span>Major in @edu.Description</span></li>
+                                        <li>Course Duration: <span>2 Years</span></li>
+                                        <li>Result: <span>4.00 </span></li>*@
+                                    </ul>
+                                    <p>@edu.Description</p>
+                                </li>
+                            }
+                        </ul>
+                    }
+
+                </div>
+            </div><!-- educational-background -->
+
+            <div class="special-qualification: section">
+                <div class="icons">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+                <div class="qualification">
+                    <h3>Special Qualification:</h3>
+                    <ul>
+                        @{
+                            var qualification = Model.SkillsAndQualifications.Split('\n');
+                            int count = 1;
+                            foreach (var item in qualification)
+                            {
+                                <li><span>@count.</span> @item</li>
+                                count++;
+                            }
+                        }
+                    </ul>
+                </div>
+            </div><!-- educational-background -->
+
+            <div class="language-proficiency section">
+                <div class="icons">
+                    <i class="fa fa-language" aria-hidden="true"></i>
+                </div>
+                <div class="proficiency">
+                    <h3>Language Proficiency</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <h5>English</h5>
+                            <ul>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h5>German</h5>
+                            <ul>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h5>Spanish</h5>
+                            <ul>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h5>Latin</h5>
+                            <ul>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- language-proficiency -->
+
+            <div class="personal-deatils section">
+                <div class="icons">
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                </div>
+                <div class="personal-info">
+                    <h3>Personal Deatils</h3>
+                    <ul class="address">
+                        <li><h5>Full Name </h5> <span>:</span>@Model.FullName</li>
+                        <li><h5>Father's Name </h5> <span>:</span>@Model.FirstName</li>
+                        <li><h5>Mother's Name </h5> <span>:</span>@Model.SecondName</li>
+                        <li><h5>Date of Birth </h5> <span>:</span>@Model.DateOfBirth.ToString("dd/mm/yyyy")</li>
+                        <li><h5>Nationality </h5> <span>:</span>@Model.Nationality</li>
+                        <li><h5>Sex </h5> <span>:</span>@Model.Gender</li>
+                        <li><h5>Address </h5> <span>:</span>@Model.Address</li>
+                    </ul>
+                </div>
+            </div><!-- personal-deatils -->
+
+            <div class="declaration section">
+                <div class="icons">
+                    <i class="fa fa-hand-peace-o" aria-hidden="true"></i>
+                </div>
+               
+            </div><!-- career-objective -->
+      
+        </div><!-- resume-content -->
+     
+    </div><!-- container -->
+</section><!-- ad-profile-page -->

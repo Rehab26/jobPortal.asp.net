@@ -1,0 +1,154 @@
+﻿@model JobPortal.Models.Implementation.Company
+@{
+    ViewBag.Title = "CompanyProfile";
+}
+
+<section class=" job-bg page ad-profile-page">
+    <div class="container">
+        <div class="breadcrumb-section">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Client</li>
+            </ol>
+            <h2 class="title">COmpany Dashboard</h2>
+        </div><!-- breadcrumb-section -->
+
+        <div class="job-profile section">
+            <div class="user-profile">
+              
+                <div class="user-images">
+                    <form id="form1" style="width:83px;height:102px">
+                      
+                        <img id="blah" class="img-responsive" src="@Url.Content(Model.ProfileImageUri)" alt="User" style="width:73px;height:72px; margin-top:0px">
+                        <div>
+                            <input type='file' id="imgInp" value="Change" accept="image/*"/>                             
+                        </div>
+                      
+                    </form>
+                 
+                </div>
+                <div class="user">
+                    <h2> <a href="#">@Model.Name</a></h2>
+                    <input id="btnSaveImg" type="button" onclick="saveImage()" value="Update" class="btn-info btn-sm" />
+                    @*<h5>You last logged in at: 10-01-2017 6:40 AM [ USA time (GMT + 6:00hrs)]</h5>*@
+                </div>
+
+                <div class="favorites-user">
+                    <div class="my-ads">
+                        <a href="#">@Model.Jobs.Count<small>Jobs Posted</small></a>
+                    </div>
+                    <div class="favorites">
+                        <a href="#">@ViewBag.RecentApplications<small>Recent Applications</small></a>
+                    </div>
+                </div>
+            </div><!-- user-profile -->
+        
+            @*<ul class="user-menu">
+                <li>@Html.ActionLink("Manage Account", "Manage")</li>
+                <li>@Html.ActionLink("Resume", "Index")</li>
+                <li class="active">@Html.ActionLink("Edit Resume", "EditResume")</li>
+                <li>@Html.ActionLink("Favourites", "Favourites")</li>
+                <li>@Html.ActionLink("Applied jobs", "AppliedJobs")</li>
+            </ul>*@
+        </div><!-- ad-profile -->
+
+        <div class="section">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Job Title</th>
+                        <th>Position</th>
+                        <th>Date Posted</th>
+                        <th>Date Expiring</th>
+                        <th>Applicants</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1; }
+                    @foreach (var job in Model.Jobs)
+                    {
+                        <tr>
+                            <td>@count</td>
+                            <td>@job.Title</td>
+                            <td>@job.JobStatus.ToString()</td>
+                            <td>@job.DatePosted.ToString("D")</td>
+                            <td>@job.ApplicationDeadline.ToString("D")</td>
+                            <td> @Html.ActionLink(@job.NumberOfApplicants+" Applicants", "JobApplicants", "Job", new { jobId=job.ID }, new { @class = "btn btn-primary", @type = "button" })</td>
+                            <td>
+                                <ul>
+                                    @Html.ActionLink("Edit", "Edit","Job", new {id=@job.ID }, new {@class="btn btn-sm btn-warning", @type="button" })
+                                    <li>  @Html.ActionLink("Mark as filled", "ChangeStatus", "Job", new { jobId = @job.ID, status = 1 }, new { @class = "btn btn-info", @type = "button" })</li>
+                                    @if (job.JobStatus == JobPortal.Models.Enums.JobStatus.Closed)
+                                    {
+                                        <li>  @Html.ActionLink("Open", "ChangeStatus", "Job", new { jobId = @job.ID, status = 0 }, new { @class = "btn btn-success", @type = "button" })</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("Close", "ChangeStatus", "Job", new { jobId = @job.ID, status = 2 }, new { @class = "btn btn-danger", @type = "button" })</li>
+                                    }                                                                        
+                                </ul>
+
+                            </td>
+                        </tr>
+                        count++;
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        
+
+    </div>
+</section>
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function saveImage() {
+        document.getElementById("btnSaveImg").disabled = true;
+        var mf = document.getElementById("imgInp").files[0]
+
+        var formData = new FormData($('form1').get(0));
+        formData.append("file", mf);
+
+
+        //Let's post to server
+        $.ajax({
+            type: "POST",
+            //dataType: "JSON",
+            url: "/Profile/UpdateCompanyProfileImage?cc=" + @Model.ID ,
+            data: formData,  //JSON.stringify(vmm),
+            contentType: false, // "application/json"
+            processData: false,
+
+            error: function () {
+                alert("An error occured while saving your image");
+            },
+
+            success: function (result) {
+                alert("Image saved!");
+                document.getElementById("btnSaveImg").disabled = false;
+            }
+        })
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>
+

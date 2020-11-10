@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "d7kKlhbBksmbIXu68+pqMQl1KzIjCptlqNQwqyWJygGRlxOA29QIOYbV8Fd3m0ri3K0+DSdvxg4jkrCyeVmy5A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Rehab\\source\\repos\\JobPortal\\JobPortal.Data\\JobPortal.Data.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rehab\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\Rehab\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Rehab\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
